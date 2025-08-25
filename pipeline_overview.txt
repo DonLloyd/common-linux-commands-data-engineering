@@ -1,0 +1,45 @@
+## common scenario - count the files in usr/bin
+ls -l /usr/bin | wc -l
+
+## piping the same output to a file
+ls -l /usr/bin/ | wc -l > bin.txt
+
+## Conditional processing $$ is conditional operator
+ls -l /usr/bin/ && touch newfile.txt # Here b/c the first process is successful, the second will be executed
+
+STR=$'1. This is a line\n2. This is a line\n3. This is a line.' #Puts the text in the variable '$STR'
+echo "$STR"
+#This can be output into a file with piping.
+echo "$STR" > lines.txt
+cat lines.txt
+# To reverse the order
+cat lines.txt | sort -r
+cat lines.txt | sort -r | less # allows you to navigate using the up arrow; good for large files
+
+# Using grep to search for a pattern
+cat lines.txt | grep 3
+#The matched line can also be piped to a file
+cat lines.txt | grep 3 > match.txt
+
+#Appending contents to a file using a double gt >>
+echo "something" >> append.txt
+
+# Throwing away errors with 2>
+ls -l /wrongpath 2> dev/null
+
+# Looking at output from logs; it will keep a file open and everytime something is added it will display the changes
+tail -f /var/log/dpkg.log
+# NOTE: if you are not sure of the path, type part and then hit TAB for autocompletion on available options
+# To get out of this use Ctrl-C
+
+# We can also look at the last two lines
+tail -n 2 /var/log/dpkg.log
+ # Use head to look at the head of the file with the -n [#] where # is the numbrer of lines to return
+
+ # View the history of commands entered at the command line
+ history | less
+ #You can also grep for a specific command you entered earlier
+ history | grep tail # where tail is a command I have used
+ #NOTE: shortcut to run that command you found
+ ![line#] # for instance !37
+ #Aslo !! will run the last command in history
